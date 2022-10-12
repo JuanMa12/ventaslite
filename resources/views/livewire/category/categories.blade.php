@@ -7,15 +7,16 @@
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
                 <ul class="tabs tab-pills">
-                    @can('Category_Create')
                     <li>
                         <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">Agregar</a>
                     </li>
+                    @can('Category_Create')
                     @endcan
                 </ul>
             </div>
-            @can('Category_Search')
+            
             @include('common.searchbox')
+            @can('Category_Search')
             @endcan
 
             <div class="widget-content">
@@ -43,10 +44,11 @@
                                 </td>
 
                                 <td class="text-center">
-                                    @can('Category_Update')
+                                    
                                     <a href="javascript:void(0)" wire:click="Edit({{$category->id}})" class="btn btn-dark mtmobile" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    @can('Category_Update')
                                     @endcan
 
 
@@ -75,48 +77,51 @@
 
     </div>
 
-    {{-- @include('livewire.category.form') --}}
+    @include('livewire.category.form')
 </div>
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function(){
 
-        window.livewire.on('show-modal', msg => {
-            $('#theModal').modal('show')
-        });
-        window.livewire.on('category-added', msg => {
-            $('#theModal').modal('hide')
-        });
-        window.livewire.on('category-updated', msg => {
-            $('#theModal').modal('hide')
-        });
-        window.livewire.on('category-deleted', msg => {
-            $('#theModal').modal('hide')
+		window.livewire.on('show-modal', msg =>{
+			$('#theModal').modal('show')
+		});
+		window.livewire.on('category-added', msg =>{
+			$('#theModal').modal('hide')
             noty(msg)
-        });
+		});
+		window.livewire.on('category-updated', msg =>{
+			$('#theModal').modal('hide')
+            noty(msg)
+		});
+		window.livewire.on('category-deleted', msg =>{
+            noty(msg)
+		});
+	});
 
-    });
 
 
+	function Confirm(id)
+	{
 
-    function Confirm(id) {
+		swal({
+			title: 'CONFIRMAR',
+			text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+			type: 'warning',
+			showCancelButton: true,
+			cancelButtonText: 'Cerrar',
+			cancelButtonColor: '#fff',
+			confirmButtonColor: '#3B3F5C',
+			confirmButtonText: 'Aceptar'
+		}).then(function(result) {
+			if(result.value){
+				window.livewire.emit('deleteRow', id)
+				swal.close()
+			}
 
-        swal({
-            title: 'CONFIRMAR',
-            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'Cerrar',
-            cancelButtonColor: '#fff',
-            confirmButtonColor: '#3B3F5C',
-            confirmButtonText: 'Aceptar'
-        }).then(function(result) {
-            if (result.value) {
-                window.livewire.emit('deleteRow', id)
-                swal.close()
-            }
+		})
+	}
 
-        })
-    }
+
 </script>

@@ -26,3 +26,4 @@
     }
 </script>
 <!-- END SCRIPTS -->
+@livewireScripts
