@@ -13,4 +13,7 @@ class Category extends Model
         'name',
         'image'
     ];
+
+    //boot create  update 
+
 }

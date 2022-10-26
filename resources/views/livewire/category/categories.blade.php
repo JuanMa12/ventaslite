@@ -14,7 +14,7 @@
                     @endcan
                 </ul>
             </div>
-            
+
             @include('common.searchbox')
             @can('Category_Search')
             @endcan
@@ -39,12 +39,12 @@
                                 </td>
                                 <td class="text-center">
                                     <span>
-                                        <img src="{{ asset('storage/categories/' . $category->imagen) }}" alt="imagen de ejemplo" height="70" width="80" class="rounded">
+                                        <img src="{{ asset('storage/categories/' . $category->image) }}" alt="imagen de ejemplo" height="70" width="80" class="rounded">
                                     </span>
                                 </td>
 
                                 <td class="text-center">
-                                    
+
                                     <a href="javascript:void(0)" wire:click="Edit({{$category->id}})" class="btn btn-dark mtmobile" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -52,13 +52,14 @@
                                     @endcan
 
 
-                                    
-                                        @can('Category_Destroy') 
-                                            <a href="javascript:void(0)" onclick="Confirm('{{$category->id}}')" class="btn btn-dark" title="Delete">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        @endcan
-                                       {{-- @if($category->products->count() < 1 ) 
+
+
+                                    <a href="javascript:void(0)" onclick="Confirm('{{$category->id}}')" class="btn btn-dark" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    @can('Category_Destroy')
+                                    @endcan
+                                    {{-- @if($category->products->count() < 1 ) 
                                     @endif --}}
 
                                 </td>
@@ -82,46 +83,43 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('DOMContentLoaded', function() {
 
-		window.livewire.on('show-modal', msg =>{
-			$('#theModal').modal('show')
-		});
-		window.livewire.on('category-added', msg =>{
-			$('#theModal').modal('hide')
+        window.livewire.on('show-modal', msg => {
+            $('#theModal').modal('show')
+        });
+        window.livewire.on('category-added', msg => {
+            $('#theModal').modal('hide')
             noty(msg)
-		});
-		window.livewire.on('category-updated', msg =>{
-			$('#theModal').modal('hide')
+        });
+        window.livewire.on('category-updated', msg => {
+            $('#theModal').modal('hide')
             noty(msg)
-		});
-		window.livewire.on('category-deleted', msg =>{
+        });
+        window.livewire.on('category-deleted', msg => {
             noty(msg)
-		});
-	});
+        });
+    });
 
 
 
-	function Confirm(id)
-	{
+    function Confirm(id) {
 
-		swal({
-			title: 'CONFIRMAR',
-			text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
-			type: 'warning',
-			showCancelButton: true,
-			cancelButtonText: 'Cerrar',
-			cancelButtonColor: '#fff',
-			confirmButtonColor: '#3B3F5C',
-			confirmButtonText: 'Aceptar'
-		}).then(function(result) {
-			if(result.value){
-				window.livewire.emit('deleteRow', id)
-				swal.close()
-			}
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonColor: '#3B3F5C',
+            confirmButtonText: 'Aceptar'
+        }).then(function(result) {
+            if (result.value) {
+                window.livewire.emit('deleteRow', id)
+                swal.close()
+            }
 
-		})
-	}
-
-
+        })
+    }
 </script>
