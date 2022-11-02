@@ -16,6 +16,7 @@ class CategoriesController extends Component
 
     public $name, $search, $image, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
+    protected $listeners = ['deleteRow' => 'Destroy'];
 
     protected function getRulesAndMessages($type = null)
     {
@@ -121,11 +122,10 @@ class CategoriesController extends Component
 
     public function Destroy(Category $category)
     {
-
         $imageName = $category->image;
         $category->delete();
 
-        if ($imageName != null) {
+        if ($imageName) {
             unlink('storage/categories/' . $imageName);
         }
 

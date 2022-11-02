@@ -14,6 +14,8 @@ class Category extends Model
         'image'
     ];
 
-    //boot create  update 
-
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
