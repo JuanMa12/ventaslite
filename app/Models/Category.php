@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\GlobalApp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,10 +22,6 @@ class Category extends Model
 
     public function getImageAttribute($image)
     {
-        $path_url = 'storage/categories/';
-        if (file_exists($path_url . $image) && !is_null($image))
-            return $path_url . $image;
-        else
-            return '/assets/img/200x200.jpg';
+        return GlobalApp::viewImage($image, 'categories');
     }
 }
