@@ -18,4 +18,13 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getImageAttribute($image)
+    {
+        $path_url = 'storage/categories/';
+        if (file_exists($path_url . $image) && !is_null($image))
+            return $path_url . $image;
+        else
+            return '/assets/img/200x200.jpg';
+    }
 }

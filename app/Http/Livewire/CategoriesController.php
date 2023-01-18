@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Helpers\GlobalApp;
-use App\Http\Requests\CategoryStoreRequest;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
@@ -14,7 +13,7 @@ class CategoriesController extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name, $search, $image, $selected_id, $pageTitle, $componentName;
+    public $name, $image, $search, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
     protected $listeners = ['deleteRow' => 'Destroy'];
 
