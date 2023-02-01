@@ -54,13 +54,13 @@
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
             <label>Categoría</label>
-            <select wire:model='categoryid' class="form-control">
-                <option value="Elegir" disabled>Elegir</option>
+            <select wire:model='category_id' class="form-control">
+                <option value="null" disabled>Elegir</option>
                 @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </select>
-            @error('categoryid') <span class="text-danger er">{{ $message}}</span>@enderror
+            @error('category_id') <span class="text-danger er">{{ $message}}</span>@enderror
         </div>
     </div>
 

@@ -28,6 +28,6 @@ class Product extends Model
 
     public function getImageAttribute($image)
     {
-        return GlobalApp::viewImage($image, 'categories');
+        return GlobalApp::viewImage($image, 'products');
     }
 }

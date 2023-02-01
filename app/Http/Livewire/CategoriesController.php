@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Helpers\GlobalApp;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
